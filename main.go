@@ -45,7 +45,7 @@ func main() {
 	for i := 0; i < 5; i++ {
 		stdout, stderr = cmd.CombinedOutput()
 		if stderr != nil {
-			log.Printf("check failed: %s\n", stderr)
+			log.Printf("execution failed: %s\n", stderr)
 			time.Sleep(30 * time.Second)
 		} else {
 			break
