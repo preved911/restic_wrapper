@@ -37,17 +37,16 @@ func main() {
 			os.Getenv("RESTIC_REPOSITORY_BUCKET"),
 			os.Getenv("RESTIC_REPOSITORY_PREFIX")))
 
-	cmd := exec.Command(resticExecPath, os.Args[1:]...)
-
 	var stdout []byte
 	var stderr error
 
 	// 5 attempts before failed state return
 	for i := 0; i < 5; i++ {
+		cmd := exec.Command(resticExecPath, os.Args[1:]...)
 		stdout, stderr = cmd.CombinedOutput()
 		if stderr != nil {
 			log.Printf("execution failed: %s\n", stderr)
-			time.Sleep(time.Duration(rand.Intn(5)) * time.Second)
+			time.Sleep(time.Duration(5*rand.Intn(5)) * time.Second)
 		} else {
 			break
 		}
