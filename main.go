@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"math/rand"
 	"os"
 	"os/exec"
 	"time"
@@ -46,7 +47,7 @@ func main() {
 		stdout, stderr = cmd.CombinedOutput()
 		if stderr != nil {
 			log.Printf("execution failed: %s\n", stderr)
-			time.Sleep(30 * time.Second)
+			time.Sleep(time.Duration(rand.Intn(5)) * time.Second)
 		} else {
 			break
 		}
